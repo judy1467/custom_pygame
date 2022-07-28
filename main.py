@@ -29,3 +29,5 @@ while True:
         if event.type == pg.QUIT: # x를 눌렀을 때 종료
             pg.quit() # pygame 종료
             exit(0) # while문 종료
+
+# 테스트
