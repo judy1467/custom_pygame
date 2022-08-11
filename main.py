@@ -9,13 +9,16 @@ screen = pg.display.set_mode((width, height))
 pg.display.set_caption('빛의 경로')
 font = pygame.font.SysFont("arial", 20, False, False)
 text = font.render("times: ", True, default_color)
-clock = pygame.time.Clock() #프레임 설정
+clock = pygame.time.Clock() #프레임 설 정
+arrow = pygame.image.load("resources/images/arrow.png")
 
 while True:
     screen.fill((0,0,0)) # 화면 초기화
     clock.tick(30) # 30프레임
-    screen.blit(text, (10, 10))
     pg.draw.rect(screen, default_color, (10, 35, 580, 555), 2) # 직사각형 그리기
+    screen.blit(arrow, (100, 100))
+    screen.blit(text, (10, 10))
+
     pg.display.update() # 화면 전체 업데이트 메소드
 
     #pg.draw.line(screen, , (10, 10), (100, 10), 1) # 선 긋기
