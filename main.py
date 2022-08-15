@@ -1,5 +1,6 @@
 import pygame as pg
 import pygame.font
+import math
 
 pg.init() # 초기화
 
@@ -10,6 +11,7 @@ pg.display.set_caption('빛의 경로')
 font = pygame.font.SysFont("arial", 20, False, False)
 text = font.render("times: ", True, default_color)
 clock = pygame.time.Clock() #프레임 설정
+circle = pygame.image.load("resources/images/circle.png")
 arrow = pygame.image.load("resources/images/arrow.png")
 map = pygame.image.load("resources/convert/map1.jpg")
 bg_rect = (10, 35, 580, 555) # width = 570, height = 520
@@ -21,8 +23,15 @@ while True:
     clock.tick(60) # 60프레임
     pg.draw.rect(screen, default_color, bg_rect, 2) # 직사각형 그리기
     screen.blit(map, (10+2, 35+2))
-    screen.blit(arrow, playerpos)
+    screen.blit(circle, playerpos)
     screen.blit(text, (10, 10))
+
+    positon = pg.mouse.get_pos()
+    angle = math.atan2(positon[1] - (playerpos[1] + 32), positon[0] - (playerpos[0] + 26))
+    playerrot = pg.transform.rotate(arrow, 360-angle*57.29)
+    playerpos1 = (playerpos[0]-playerrot.get_rect().width//2, playerpos[1]-playerrot.get_rect().height//2)
+
+    screen.blit(playerrot, playerpos1)
 
     pg.display.update() # 화면 전체 업데이트 메소드
 
@@ -72,3 +81,4 @@ while True:
         playerpos[1] = bg_rect[1]
     elif playerpos[1] > bg_rect[3]:
         playerpos[1] = bg_rect[3]
+
